@@ -1,4 +1,5 @@
 .idea/
 depo/
 .vscode/
+__pycache__/
 
