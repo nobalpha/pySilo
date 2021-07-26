@@ -1,19 +1,26 @@
 import dearpygui.dearpygui as dpg
 
+with dpg.window(label="Tutorial"):
 
-def save_callback():
-    print("Save Clicked")
+    with dpg.table(header_row=False):
 
+        # use add_table_column to add columns to the table,
+        # table columns use child slot 0
+        dpg.add_table_column()
+        dpg.add_table_column()
+        dpg.add_table_column()
 
-def print_height():
-    print(dpg.get_viewport_height())
+        # add_table_next_column will jump to the next row
+        # once it reaches the end of the columns
+        # table next column use slot 1
+        for i in range(0, 4):
+            for j in range(0, 3):
+                if i == 1 and j == 0 or i == 2 and j == 1:
+                    dpg.add_button(label="oh yeassss", height=100, width=50)
+                else:
+                    dpg.add_text(f"Row{i} Column{j}")
+                # call if not last cell
+                if not (i == 3 and j == 2):
+                    dpg.add_table_next_column()
 
-
-with dpg.window(label="Example Window", no_title_bar=True, pos=(0, 0)) as w:
-    dpg.add_text("Hello, world")
-    dpg.add_button(label="Save", callback=save_callback)
-    dpg.add_input_text(label="string", default_value="Quick brown fox")
-    dpg.add_slider_float(label="float", default_value=0.273, max_value=1)
-
-dpg.set_viewport_resize_callback(print_height)
 dpg.start_dearpygui()
